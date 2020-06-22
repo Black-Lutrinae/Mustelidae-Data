@@ -24,24 +24,52 @@ class Database():
 
     def set(self, obj:dict, ref:str=None):
         if ref:
+            reference = self.reference
             self.reference = set_path(self.reference, ref)
         if isinstance(self.reference, DocumentReference):
-            self.reference.set(obj)
+            if self.batch:
+                self.batch.set(self.reference, obj)
+            else:
+                self.reference.set(obj)
         else:
             print('Reference must be a Document')
+        if ref:
+            self.reference = reference
 
     def get(self, ref:str=None):
         if ref:
+            reference = self.reference
             self.reference = set_path(self.reference, ref)
         result = self.reference.get()
         return result.to_dict()
+        if ref:
+            self.reference = reference
 
     def update(self, obj:object, ref:str=None):
         if ref:
+            reference = self.reference
             self.reference = set_path(self.reference, ref)
-        self.reference.update(obj)
+        if self.batch:
+            self.batch.update(self.reference, obj)
+        else:
+            self.reference.update(obj)
+        if ref:
+            self.reference = reference
 
     def delete(self, ref:str=None):
         if ref:
+            reference = self.reference
             self.reference = set_path(self.reference, ref)
-        self.reference.delete()
+        if self.batch:
+            self.batch.delete(self.reference)
+        else:
+            self.reference.delete()
+        if ref:
+            self.reference = reference
+
+    def open_batch(self):
+        self.batch = self.client.batch()
+    
+    def close_batch(self):
+        self.batch.commit()
+        self.batch = None
