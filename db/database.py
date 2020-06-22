@@ -1,5 +1,5 @@
-from connection import connection
-from reference import *
+from .connection import connection
+from .reference import *
 from firebase_admin.firestore import DocumentReference, CollectionReference
 
 class Database():
