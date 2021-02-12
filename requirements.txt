@@ -1,3 +1,5 @@
 firebase-admin
 pymongo
 docker
+sqlalchemy
+pandas

@@ -9,11 +9,11 @@ First install this repository as dependency, adding this to your requirements.tx
 
 * Using HTTPS:
 ```
-https://github.com/Black-Lutrinae/Mustelidae-Data.git
+https://github.com/black-lutrinae/must-data.git
 ```
 * Using SSH:
 ```
-git@github.com:Black-Lutrinae/Mustelidae-Data.git
+git@github.com:black-lutrinae/must-data.git
 ```
 
 ## Credentials
